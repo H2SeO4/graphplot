@@ -1,13 +1,51 @@
-<!doctype html>
+<!DOCTYPE html>
 <html lang="zh-CN">
-  <head>
-    <meta charset="UTF-8" />
-    <link rel="icon" type="image/svg+xml" href="/vite.svg" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>GraphPlot - AI辅助网站建设</title>
-  </head>
-  <body>
-    <div id="app"></div>
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>函数图形计算器</title>
+    <!-- 使用 jsDelivr CDN 加速国内访问 -->
+    
+    <!-- 引入 function-plot -->
+    <script src="https://cdn.jsdelivr.net/npm/function-plot/dist/function-plot.js"></script>
+    
+    <!-- 引入 math.js -->
+    <script src="https://cdn.jsdelivr.net/npm/mathjs@11.8.0/lib/browser/math.min.js"></script>
+    
+    <!-- 引入 Plotly.js (使用轻量版) -->
+    <script src="https://cdn.jsdelivr.net/npm/plotly.js-dist-min@2.27.0/plotly.min.js"></script>
+    
+    <!-- 引入 MathLive (移除 defer 以确保按顺序加载) -->
+    <script src="https://cdn.jsdelivr.net/npm/mathlive/dist/mathlive.min.js"></script>
+</head>
+<body>
+    <div class="container">
+        <div class="sidebar">
+            <div class="header">
+                <h1>GraphPlot</h1>
+                <div class="controls">
+                    <button id="mode-btn" class="btn-secondary">切换到 3D</button>
+                    <button id="add-btn" class="btn-primary">+ 添加函数</button>
+                </div>
+            </div>
+            <div id="function-list" class="function-list">
+                <!-- 函数输入项将在这里动态生成 -->
+            </div>
+            
+            <!-- 底部键盘控制区 -->
+            <div class="keyboard-control-area">
+                <button id="export-btn" class="export-btn" title="导出图片">
+                    <svg viewBox="0 0 24 24" width="24" height="24" fill="currentColor"><path d="M19 12v7H5v-7H3v7c0 1.1.9 2 2 2h14c1.1 0 2-.9 2-2v-7h-2zm-6 .67l2.59-2.58L17 11.5l-5 5-5-5 1.41-1.41L11 12.67V3h2v9.67z"/></svg>
+                </button>
+                <button id="keyboard-toggle-btn" class="keyboard-toggle-btn" title="显示/隐藏键盘">
+                    <svg viewBox="0 0 24 24" width="24" height="24" fill="currentColor"><path d="M20 5H4c-1.1 0-1.99.9-1.99 2L2 17c0 1.1.9 2 2 2h16c1.1 0 2-.9 2-2V7c0-1.1-.9-2-2-2zm-9 3h2v2h-2V8zm0 3h2v2h-2v-2zM8 8h2v2H8V8zm0 3h2v2H8v-2zm-1 2H5v-2h2v2zm0-3H5V8h2v2zm9 7H8v-2h8v2zm0-4h-2v-2h2v2zm0-3h-2V8h2v2zm3 3h-2v-2h2v2zm0-3h-2V8h2v2z"/></svg>
+                </button>
+            </div>
+        </div>
+        <div class="main-content">
+            <div id="plot" class="plot-container"></div>
+        </div>
+    </div>
     <script type="module" src="/src/main.ts"></script>
-  </body>
+</body>
 </html>

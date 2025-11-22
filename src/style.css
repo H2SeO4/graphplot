@@ -1,133 +1,301 @@
-:root {
-  font-family: 'Segoe UI', system-ui, -apple-system, BlinkMacSystemFont, sans-serif;
-  color: #f5f7ff;
-  background-color: #05070e;
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
 }
 
 body {
-  margin: 0;
-  background: radial-gradient(circle at top, #11152b 0%, #05070e 60%);
-  min-height: 100vh;
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+    height: 100vh;
+    overflow: hidden;
+    display: flex;
+    color: #333;
+    font-size: 20px; /* 增大基准字体 */
 }
 
-#app {
-  max-width: 960px;
-  margin: 0 auto;
-  padding: 40px 20px 80px;
+.container {
+    display: flex;
+    width: 100%;
+    height: 100%;
 }
 
-.hero {
-  display: grid;
-  gap: 16px;
-  background: #121626;
-  border: 1px solid #1f2336;
-  border-radius: 18px;
-  padding: 32px;
-  box-shadow: 0 20px 60px rgba(0, 0, 0, 0.45);
+/* Sidebar Styles */
+.sidebar {
+    width: 400px; /* 再次加宽 */
+    background-color: #f9f9f9;
+    border-right: 1px solid #ddd;
+    display: flex;
+    flex-direction: column;
+    padding: 20px;
+    z-index: 10;
+    box-shadow: 2px 0 5px rgba(0,0,0,0.05);
+    position: relative; /* 为绝对定位的键盘做参考 */
 }
 
-.eyebrow {
-  letter-spacing: 0.3em;
-  text-transform: uppercase;
-  color: #6ddcff;
-  font-size: 0.75rem;
-  margin-bottom: 8px;
+.header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 20px;
+    padding-bottom: 15px;
+    border-bottom: 1px solid #eee;
+    flex-wrap: wrap;
+    gap: 10px;
 }
 
-.hero h1 {
-  margin: 0 0 8px;
-  font-size: 2.2rem;
+.header h1 {
+    font-size: 1.8rem;
+    color: #2c3e50;
+    width: 100%;
+    margin-bottom: 10px;
 }
 
-.hero-actions {
-  display: flex;
-  gap: 12px;
-  margin-top: 16px;
+.controls {
+    display: flex;
+    gap: 10px;
+    width: 100%;
 }
 
-.primary,
-.ghost,
-button {
-  border: none;
-  border-radius: 999px;
-  padding: 10px 20px;
-  font-size: 0.95rem;
-  cursor: pointer;
+.btn-primary, .btn-secondary {
+    padding: 10px 18px;
+    border-radius: 8px;
+    cursor: pointer;
+    font-size: 1.1rem;
+    flex: 1;
+    border: none;
+    transition: background-color 0.2s;
 }
 
-.primary {
-  background: linear-gradient(120deg, #ff6f61, #ffb347);
-  color: #0b0e18;
+.btn-primary {
+    background-color: #4CAF50;
+    color: white;
 }
 
-.ghost {
-  background: transparent;
-  color: #cdd5ff;
-  border: 1px solid rgba(255, 255, 255, 0.2);
+.btn-primary:hover {
+    background-color: #45a049;
 }
 
-.panel {
-  margin-top: 24px;
-  padding: 24px;
-  border-radius: 18px;
-  background: #0b0e18;
-  border: 1px solid #181c2e;
+.btn-secondary {
+    background-color: #2196F3;
+    color: white;
 }
 
-form label {
-  display: flex;
-  flex-direction: column;
-  gap: 6px;
-  font-size: 0.9rem;
-  color: #c8d0ff;
+.btn-secondary:hover {
+    background-color: #1976D2;
 }
 
-input,
-select {
-  background: #05070f;
-  border: 1px solid #1b2137;
-  border-radius: 10px;
-  padding: 10px 12px;
-  color: #f5f7ff;
-  font-size: 1rem;
+.function-list {
+    flex: 1;
+    overflow-y: auto;
+    margin-bottom: 60px; /* 留出空间给底部按钮 */
 }
 
-.grid-2 {
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
-  gap: 16px;
-  margin-top: 12px;
+.function-item {
+    background: white;
+    border: 1px solid #ddd;
+    border-radius: 8px;
+    padding: 12px;
+    margin-bottom: 12px;
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    transition: box-shadow 0.2s;
 }
 
-.canvas-wrapper {
-  margin-top: 28px;
-  padding: 24px;
-  background: #05070f;
-  border-radius: 18px;
-  border: 1px solid #181c2e;
+.function-item:focus-within {
+    box-shadow: 0 0 0 2px rgba(76, 175, 80, 0.2);
+    border-color: #4CAF50;
 }
 
-canvas {
-  width: 100%;
-  max-width: 920px;
-  border-radius: 12px;
-  border: 1px solid #232a41;
+.color-indicator {
+    width: 28px;
+    height: 28px;
+    border-radius: 50%;
+    flex-shrink: 0;
+    margin-top: 5px;
 }
 
-.canvas-actions {
-  margin-top: 12px;
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  font-size: 0.9rem;
-  color: #8f9bcf;
+.function-input-group {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    min-width: 0;
 }
 
-canvas,
-button {
-  transition: transform 120ms ease;
+.input-row {
+    display: flex;
+    align-items: center;
+    width: 100%;
 }
 
-button:active {
-  transform: translateY(1px);
+.function-prefix {
+    color: #666;
+    font-style: italic;
+    margin-right: 8px;
+    font-family: 'Times New Roman', Times, serif;
+    white-space: nowrap;
+    font-size: 1.2rem;
+}
+
+/* MathLive Field Styles */
+math-field {
+    width: 100%;
+    font-size: 1.3rem;
+    padding: 6px;
+    border: 1px solid transparent;
+    border-radius: 4px;
+    background: transparent;
+}
+
+/* 隐藏 MathLive 内部的虚拟键盘切换按钮和菜单按钮 */
+math-field::part(virtual-keyboard-toggle) {
+    display: none;
+}
+
+math-field::part(menu-toggle) {
+    display: none;
+}
+
+math-field:focus-within {
+    outline: none;
+    background: rgba(0, 0, 0, 0.03);
+    border-color: #ddd;
+}
+
+/* 隐藏原来的 input 和 latex-preview */
+.function-input, .latex-preview {
+    display: none;
+}
+
+.btn-remove {
+    background: none;
+    border: none;
+    color: #999;
+    cursor: pointer;
+    font-size: 1.8rem;
+    padding: 0 5px;
+    margin-left: auto;
+}
+
+.btn-remove:hover {
+    color: #ff4444;
+}
+
+/* Keyboard Control Area */
+.keyboard-control-area {
+    position: absolute;
+    bottom: 20px;
+    left: 20px;
+    right: 20px;
+    display: flex;
+    justify-content: space-between; /* 两端对齐 */
+    z-index: 100; /* 确保在最上层 */
+    pointer-events: none; /* 让容器不阻挡点击，按钮单独开启 */
+}
+
+.keyboard-control-area > button {
+    pointer-events: auto; /* 开启按钮点击 */
+}
+
+.keyboard-toggle-btn, .export-btn {
+    background: #fff;
+    border: 1px solid #ccc;
+    border-radius: 12px; /* 圆角矩形 */
+    width: 50px;
+    height: 50px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+    transition: all 0.2s;
+    color: #555;
+}
+
+.keyboard-toggle-btn:hover, .export-btn:hover {
+    background: #f0f0f0;
+    transform: translateY(-2px);
+    box-shadow: 0 4px 12px rgba(0,0,0,0.15);
+}
+
+.export-btn {
+    color: #ff9800; /* 橙色图标 */
+}
+
+.keyboard-toggle-btn svg, .export-btn svg {
+    width: 28px;
+    height: 28px;
+}
+
+/* Function Error Message */
+.function-error {
+    color: #d32f2f;
+    font-size: 0.85rem;
+    margin-top: 5px;
+    padding-left: 5px;
+    display: none; /* 默认隐藏 */
+}
+
+/* Main Content Styles */
+.main-content {
+    flex: 1;
+    position: relative;
+    background-color: #fff;
+}
+
+.plot-container {
+    width: 100%;
+    height: 100%;
+}
+
+/* Override function-plot styles if needed */
+.function-plot {
+    width: 100% !important;
+    height: 100% !important;
+}
+
+/* MathLive Virtual Keyboard Theme Customization (美化) */
+body {
+    /* 键盘整体背景和边框 */
+    --keyboard-background: #ffffff;
+    --keyboard-border: #e0e0e0;
+    --keyboard-zindex: 5000; /* 确保在最上层 */
+    
+    /* 按键基础样式 */
+    --keycap-height: 3.2rem; /* 稍微增高按键 */
+    --keycap-font-size: 1.4rem; /* 增大字体 */
+    --keycap-gap: 6px; /* 增加按键间距 */
+    --keycap-background: #f8f9fa;
+    --keycap-text: #333;
+    --keycap-border-radius: 8px; /* 圆角按键 */
+    
+    /* 按键交互状态 */
+    --keycap-background-hover: #e9ecef;
+    --keycap-background-active: #dee2e6;
+    
+    /* 功能键/次要键样式 */
+    --keycap-secondary-background: #e2e6ea;
+    --keycap-secondary-text: #495057;
+    --keycap-secondary-background-hover: #dbe2e8;
+    
+    /* 强调键 (如 Enter/Return) */
+    --keycap-primary-background: #4CAF50;
+    --keycap-primary-text: #ffffff;
+    
+    /* 顶部工具栏 */
+    --keyboard-toolbar-background: #f1f3f5;
+    --keyboard-toolbar-text: #4CAF50;
+    --keyboard-toolbar-border-bottom: 1px solid #e0e0e0;
+}
+
+/* 强制虚拟键盘覆盖在内容之上，而不是推挤内容 */
+/* 注意：MathLive 的键盘容器类名可能会随版本变化，这里尝试通用的选择器 */
+.ML__keyboard, .math-virtual-keyboard-container {
+    position: fixed !important;
+    bottom: 0 !important;
+    left: 0 !important;
+    right: 0 !important;
+    z-index: 9999 !important;
+    box-shadow: 0 -2px 10px rgba(0,0,0,0.1);
 }
